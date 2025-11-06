@@ -2,6 +2,11 @@
 
 internal class Program
 {
+    public class MenuOption
+    {
+        public const string Exit = "0";
+    }
+
     static void Main(string[] args)
     {
         while (true)
@@ -10,7 +15,7 @@ internal class Program
             string input = Console.ReadLine() ?? string.Empty;
             switch (input)
             {
-                case "0":
+                case MenuOption.Exit:
                     return;
                 default:
                     PrintError("Invalid option.");
@@ -22,7 +27,7 @@ internal class Program
     static void PrintMenu()
     {
         Console.WriteLine("Main menu:");
-        Console.WriteLine("0. Exit");
+        Console.WriteLine($"{MenuOption.Exit}. Exit");
     }
 
     static void PrintError(string message)
