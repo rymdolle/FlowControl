@@ -8,6 +8,7 @@ internal class Program
         public const string Exit = "0";
         public const string Cinema = "1";
         public const string CinemaGroup = "2";
+        public const string Repeat = "3";
     }
 
     static void Main(string[] args)
@@ -61,6 +62,18 @@ internal class Program
                     }
                     break;
                 }
+                case MenuOption.Repeat:
+                {
+                    Console.WriteLine("Mata in en fras eller ett ord som ska upprepas.");
+                    string phrase = Console.ReadLine() ?? string.Empty;
+                    for (int i = 1; i <= 10; ++i)
+                    {
+                        // Use Write instead of WriteLine to keep it on the same line
+                        Console.Write($"{i}. {phrase} ");
+                    }
+                    Console.WriteLine();
+                    break;
+                }
                 default:
                     PrintError("Ogiltigt val.");
                     break;
@@ -73,6 +86,7 @@ internal class Program
         Console.WriteLine("Huvudmeny:");
         Console.WriteLine($"{MenuOption.Cinema}. Biopris (person)");
         Console.WriteLine($"{MenuOption.CinemaGroup}. Biopris (grupp)");
+        Console.WriteLine($"{MenuOption.Repeat}. Upprepa");
         Console.WriteLine($"{MenuOption.Exit}. Avsluta");
     }
 
