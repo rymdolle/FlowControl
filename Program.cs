@@ -9,6 +9,7 @@ internal class Program
         public const string Cinema = "1";
         public const string CinemaGroup = "2";
         public const string Repeat = "3";
+        public const string ThirdWord= "4";
     }
 
     static void Main(string[] args)
@@ -74,6 +75,18 @@ internal class Program
                     Console.WriteLine();
                     break;
                 }
+                case MenuOption.ThirdWord:
+                {
+                    Console.WriteLine("Mata in minst tre ord separerade med mellanslag:");
+                    string phrase = Console.ReadLine() ?? string.Empty;
+                    // RemoveEmptyEntries to avoid counting extra spaces as words
+                    string[] words = phrase.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                    if (words.Length >= 3)
+                        Console.WriteLine($"Det tredje ordet är: {words[2]}");
+                    else
+                        PrintError("Fel: Frasen innehåller inte minst tre ord.");
+                    break;
+                }
                 default:
                     PrintError("Ogiltigt val.");
                     break;
@@ -87,6 +100,7 @@ internal class Program
         Console.WriteLine($"{MenuOption.Cinema}. Biopris (person)");
         Console.WriteLine($"{MenuOption.CinemaGroup}. Biopris (grupp)");
         Console.WriteLine($"{MenuOption.Repeat}. Upprepa");
+        Console.WriteLine($"{MenuOption.ThirdWord}. Tredje ordet");
         Console.WriteLine($"{MenuOption.Exit}. Avsluta");
     }
 
