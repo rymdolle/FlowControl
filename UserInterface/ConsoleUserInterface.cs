@@ -1,17 +1,10 @@
-﻿using static FlowControl.Program;
-
-namespace FlowControl.UserInterface;
+﻿namespace FlowControl.UserInterface;
 
 internal class ConsoleUserInterface : IUserInterface
 {
+
     public void Display()
     {
-        Console.WriteLine("Huvudmeny:");
-        Console.WriteLine($"{MenuOption.Cinema}. Biopris (person)");
-        Console.WriteLine($"{MenuOption.CinemaGroup}. Biopris (grupp)");
-        Console.WriteLine($"{MenuOption.Repeat}. Upprepa");
-        Console.WriteLine($"{MenuOption.ThirdWord}. Tredje ordet");
-        Console.WriteLine($"{MenuOption.Exit}. Avsluta");
     }
 
     public void WriteLine(string message)
