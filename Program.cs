@@ -25,13 +25,13 @@ internal class Program
                 case MenuOption.Cinema:
                 {
                     Console.WriteLine("Ange ålder:");
-                    if (int.TryParse(Console.ReadLine()!, out int age))
+                    if (int.TryParse(Console.ReadLine()!, out int age)  && age >= 0)
                     {
                         Console.WriteLine(CinemaPrice(age, out _));
                     }
                     else
                     {
-                        goto default;
+                        PrintError("Ogiltig ålder.");
                     }
                     break;
                 }
@@ -44,14 +44,15 @@ internal class Program
                         for (int i = 1; i <= count; i++)
                         {
                             Console.WriteLine($"Ange ålder för person {i}:");
-                            if (int.TryParse(Console.ReadLine()!, out int age))
+                            if (int.TryParse(Console.ReadLine()!, out int age) && age >= 0)
                             {
                                 CinemaPrice(age, out int price);
                                 totalPrice += price;
                             }
                             else
                             {
-                                goto default;
+                                PrintError("Ogiltig ålder.");
+                                i--; // Decrement i to repeat this iteration
                             }
                         }
                         Console.WriteLine($"Antal personer: {count}");
@@ -59,7 +60,7 @@ internal class Program
                     }
                     else
                     {
-                        goto default;
+                        PrintError("Ogiltigt antal personer.");
                     }
                     break;
                 }
@@ -94,6 +95,9 @@ internal class Program
         }
     }
 
+    /// <summary>
+    /// Displays the main menu options to the console.
+    /// </summary>
     static void PrintMenu()
     {
         Console.WriteLine("Huvudmeny:");
@@ -104,6 +108,10 @@ internal class Program
         Console.WriteLine($"{MenuOption.Exit}. Avsluta");
     }
 
+    /// <summary>
+    /// Displays an error message in red text on the console.
+    /// </summary>
+    /// <param name="message">The error message to display.</param>
     static void PrintError(string message)
     {
         Console.ForegroundColor = ConsoleColor.Red;
@@ -119,7 +127,12 @@ internal class Program
     /// <returns>String description of price</returns>
     static string CinemaPrice(int age, out int price)
     {
-        if (age < 20)
+        if (age < 5 || age >= 100)
+        {
+            price = 0;
+            return "Gratis!";
+        }
+        else if (age < 20)
         {
             price = 80;
             return $"Ungdomspris: {price}kr";
